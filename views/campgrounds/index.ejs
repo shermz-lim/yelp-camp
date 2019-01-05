@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+    <div class="container mt-3">
+        <header class="jumbotron py-4">
+            <h1 class="my-2">Welcome to Yelpcamp!</h1>
+            <p class="mb-4 mt-2">View our hand-picked campsites from all over the world</p>
+            <p class="my-4">
+                <a class="btn btn-primary m-3" href="/">Home Page</a>
+                <a class="btn btn-primary m-3" href="/campgrounds/new">Create New Campground</a>
+            </p>
+        </header>
+        
+        <div class="row">
+            <% campgrounds.forEach(function(campground){ %>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card text-center">
+                      <img class="card-img-top" src="<%= campground["img"] %>" alt="Card image cap">
+                      <div class="card-body">
+                        <h6 class="card-title"><%= campground["name"] %> at <%= campground["location"] %></h6>
+                        <p><em>Created by: <%= campground.author.username %> on <%= campground.created.toDateString() %></em></p>
+                        <a href="/campgrounds/<%= campground["_id"] %>">See More</a>
+                      </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        
+    </div>
+    
+
+<% include ../partials/footer %>

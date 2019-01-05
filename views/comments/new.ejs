@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+    
+    <div class="container">
+        <h1 class="m-4 text-center">Create New Comment to <%= campground.name %></h1>
+
+        <!--form for creating new comment-->
+        <div class="row flex-column">
+            <form class="w-50 mx-auto" method="post" action="/campgrounds/<%= campground._id %>/comments">
+                <input class="form-control m-2" type="text" name="comment[author]" placeholder="<%= user.username %>" readonly="readonly">
+                <input class="form-control m-2" type="text" name="comment[text]" placeholder="comment">
+                <input class="btn btn-primary m-2 w-40" type="submit">
+            </form>
+            <br>
+            <div class="mx-auto">
+                <a href="/campgrounds/<%= campground._id %>">Go back</a>
+            </div>
+        </div>
+        
+    </div>
+    
+<% include ../partials/footer %>    

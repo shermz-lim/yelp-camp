@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="mt-5 row justify-content-around">
+        <div class="col-3 col-md-3">
+            <a class="btn btn-info btn mt-3 mb-5" href="/campgrounds">Go Back</a>
+            <ul class="list-group">
+              <li class="list-group-item active">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+            </ul>
+        </div>
+        <div class="col-9 col-md-8">
+            <h1 class="display-4"><%= campground.name %><span class="text-muted display-4">  |   <%= campground.location %></span></h1>
+            <img class = "img-fluid my-3 rounded" src="<%= campground.img %>">
+                
+            
+            <div class="p-3">
+                
+                <div class="d-flex justify-content-between">
+                    <h5><%= campground.name %></h5>
+                    <h5><%= campground.price %>/night</h5>
+                </div>
+                
+                <p class="lead mt-1 mb-2"><%= campground.description %></p>
+                <% if (user && campground.author.id.equals(user._id)) { %>
+                    <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit Campground</a>
+                    <form class="d-inline ml-2" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete Campground</button>
+                    </form>
+                <% } %>    
+                
+                <div class="pt-3 d-flex justify-content-between">
+                    <h6>3.25 stars</h6>
+                    <h6><%= campground.comments.length %> reviews</h6>
+                </div>
+                
+            </div>
+            
+            <hr>
+         
+            
+            <ul class="list-group mt-5 mb-5">
+                <li class="list-group-item-secondary list-group-item d-flex justify-content-between align-items-center">
+                    <h4 class="m-2">Reviews <span class="badge badge-info py-0 ml-2"><%= campground.comments.length %></span></h4>
+                    <span class="m-2"><a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Leave a review</a></span>
+                </li>    
+                
+                <% campground.comments.forEach(function(comment){ %>
+                <li class="list-group-item-secondary list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <strong><%= comment.author.username %></strong>
+                        <span class="badge badge-default">10 days ago</span>
+                    </div>
+                    <p class="py-1 m-0">
+                        <%= comment.text %>
+                    </p>
+                    <p>
+                        <% if (user && comment.author.id.equals(user._id)) { %>    
+                            <a class="btn btn-warning btn-sm p-0" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                            <form class="d-inline" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+                                <button class="d-inline btn btn-danger p-0 btn-sm">Delete</button>
+                            </form>
+                        <% } %>    
+                    </p>
+                </li>    
+                <% }) %>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<% include ../partials/footer %>

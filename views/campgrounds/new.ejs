@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+    
+    <div class="container">
+        <h1 class="m-4 text-center">Create New Campground</h1>
+
+        <!--form for creating new campground-->
+        <div class="row flex-column">
+            <form class="w-50 mx-auto" method="post" action="/campgrounds">
+                <input required class="form-control m-2" type="text" name="name" placeholder="Name">
+                <input required class="form-control m-2" type="number" name="price" placeholder="price/night" min="0.01" step="0.01">
+                <input required class="form-control m-2" type="text" name="location" placeholder="Location">
+                <input required class="form-control m-2" type="text" name="image-url" placeholder="Image Url">
+                <input required class="form-control m-2" type="text" name="description" placeholder="Description">
+                <input class="btn btn-primary m-2 w-40" type="submit">
+            </form>
+            <br>
+            <div class="mx-auto">
+                <a href="/campgrounds">Go back</a>
+            </div>
+        </div>
+        
+    </div>
+    
+<% include ../partials/footer %>    
