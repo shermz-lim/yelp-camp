@@ -7,7 +7,6 @@ var express = require('express'),
 
 // INDEX Show all campgrounds 
 router.get("/", function(req, res){
-    console.log("User has clicked on campgrounds page.")
     // Retrieving all campgrounds from database and storing it in var campgroundsArray
     Campground.find({}, function(err, retrieved_data){
         if (err) {
@@ -27,7 +26,6 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 router.post("/", middleware.isLoggedIn, function(req, res){
     var new_campground = {name: req.body["name"], price: String(req.body["price"]), location: req.body["location"], img: req.body["image-url"], description: req.body["description"]};
     // Creating new campground instance and storing in database
-    console.log("User created new campground data: " + new_campground);
     Campground.create(new_campground, function(err, new_data){
         if (err) {
             console.log(err);

@@ -1,25 +1,30 @@
 <% include ../partials/header %>
     <div class="container mt-3">
         <header class="jumbotron py-4">
-            <h1 class="my-2">Welcome to Yelpcamp!</h1>
-            <p class="mb-4 mt-2">View our hand-picked campsites from all over the world</p>
-            <p class="my-4">
-                <a class="btn btn-primary m-3" href="/">Home Page</a>
-                <a class="btn btn-primary m-3" href="/campgrounds/new">Create New Campground</a>
-            </p>
+            <h1 class="my-2 display-3"><i class="fas fa-campground"></i> Welcome to YelpCamp! </h1>
+            <p class="mb-4 mt-4 lead">YelpCamp is a campsite-sharing web application. Over here, you will find campsites recommended by other users and the details
+            you need to start planning for your camping trip. Sign up now to upload campsites, or leave reviews to campsites you have been to. Join our community
+            of campers now!</p>
+            <h5 class="display-5">What you can do:</h5>
+                <a class="btn btn-info m-3" href="/campgrounds/new">Create New Campground</a>
         </header>
         
         <div class="row">
             <% campgrounds.forEach(function(campground){ %>
                 <div class="col-lg-4 col-sm-6 mb-4">
-                    <div class="card text-center">
-                      <img class="card-img-top" src="<%= campground["img"] %>" alt="Card image cap">
-                      <div class="card-body">
-                        <h6 class="card-title"><%= campground["name"] %> at <%= campground["location"] %></h6>
-                        <p><em>Created by: <%= campground.author.username %> on <%= campground.created.toDateString() %></em></p>
-                        <a href="/campgrounds/<%= campground["_id"] %>">See More</a>
-                      </div>
-                    </div>
+                    <h4><%= campground["name"] %> </h4>
+                    <img class="img-fluid" src="<%= campground["img"] %>" alt="Card image cap">
+                    <p class="m-1"><em>Uploaded: <%= campground.created.toDateString() %></em></p>
+                    <hr>
+                    <p class="lead"> 
+                    Uploaded by: <%= campground.author.username %> <span class="float-right"><i class="far fa-user"></i></span>
+                    <br>
+                    Location: <%= campground["location"] %> <span class="float-right"><i class="fas fa-map-marker-alt"></i></span>
+                    <br>
+                    Price: <%= campground.price %>/night <span class="float-right"><i class="fas fa-dollar-sign"></i></i></span>
+                    </p>
+                    <a class="btn btn-info" href="/campgrounds/<%= campground["_id"] %>">See More</a>
+                    <hr>
                 </div>
             <% }) %>
         </div>

@@ -1,0 +1,5 @@
+.jumbotron {
+    /*background-image: radial-gradient(circle, #334157, #2e405d, #294063, #233f69, #1d3e6f);*/
+    background-image: linear-gradient(to bottom, #f2f2f2, #f4f4f4, #f5f6f5, #f7f7f7, #f9f9f9);
+}
+

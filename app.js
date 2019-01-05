@@ -60,7 +60,6 @@ app.use(indexRoutes);
 // seeding Database
 // seedDB();
 
-
 // ========================================================
 
 // Starting server

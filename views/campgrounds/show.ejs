@@ -11,7 +11,14 @@
             </ul>
         </div>
         <div class="col-9 col-md-8">
-            <h1 class="display-4"><%= campground.name %><span class="text-muted display-4">  |   <%= campground.location %></span></h1>
+            <h1 class="display-4"><%= campground.name %><span class="text-muted display-4">  |   <%= campground.location %></span> 
+            <% if (user && campground.author.id.equals(user._id)) { %>
+                <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/edit"><i class="fas fa-edit"></i></a>
+                <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                </form>
+            <% } %>    
+            </h1>
             <img class = "img-fluid my-3 rounded" src="<%= campground.img %>">
                 
             
@@ -23,12 +30,7 @@
                 </div>
                 
                 <p class="lead mt-1 mb-2"><%= campground.description %></p>
-                <% if (user && campground.author.id.equals(user._id)) { %>
-                    <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit Campground</a>
-                    <form class="d-inline ml-2" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete Campground</button>
-                    </form>
-                <% } %>    
+                
                 
                 <div class="pt-3 d-flex justify-content-between">
                     <h6>3.25 stars</h6>
@@ -42,8 +44,8 @@
             
             <ul class="list-group mt-5 mb-5">
                 <li class="list-group-item-secondary list-group-item d-flex justify-content-between align-items-center">
-                    <h4 class="m-2">Reviews <span class="badge badge-info py-0 ml-2"><%= campground.comments.length %></span></h4>
-                    <span class="m-2"><a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Leave a review</a></span>
+                    <h4 class="m-2">Reviews</h4>
+                    <span class="m-2"><a class="btn btn-info" href="/campgrounds/<%= campground._id %>/comments/new">Leave a review</a></span>
                 </li>    
                 
                 <% campground.comments.forEach(function(comment){ %>
