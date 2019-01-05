@@ -19,7 +19,8 @@ var campgroundRoutes = require("./routes/campgrounds.js"),
     indexRoutes = require("./routes/index.js")
 
 // Connecting to database for Yelpcamp 
-mongoose.connect('mongodb://localhost:27017/yelpcamp', { useNewUrlParser: true });
+var databaseURL = process.env.DATABASEURL || 'mongodb://localhost:27017/yelpcamp'
+mongoose.connect(databaseURL, { useNewUrlParser: true });
 
 
 // Turns request's body into an object to be manipulated
@@ -31,8 +32,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
 // usage of passport
+var secretcode = process.env.SECRET || "0ccczzz12asd983dfa1189"
 app.use(require('express-session')({
-    secret:"What is this word man",
+    secret: secretcode,
     resave: false,
     saveUninitialized: false
 }));
