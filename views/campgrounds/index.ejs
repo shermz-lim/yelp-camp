@@ -29,7 +29,21 @@
                     <br>
                     Location: <%= campground["location"] %> <span class="float-right"><i class="fas fa-map-marker-alt"></i></span>
                     <br>
-                    Price: <%= campground.price %>/night <span class="float-right"><i class="fas fa-dollar-sign"></i></i></span>
+                    Price: <%= campground.price %>/night <span class="float-right"><i class="fas fa-dollar-sign"></i></span>
+                    <br>
+                    Rating: 
+                    <% if (campground.rating >= 1) { %>
+                    <%= campground.rating %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star <% if (campground.rating > 1.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 2.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 3.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (campground.rating > 4.5) { %> checked <% } %>"></span>
+                    <% } else { %>
+                    No reviews yet.
+                    <% } %>
+                    (<%= campground.comments.length %>)
+                    <span class="float-right"><i class="far fa-thumbs-up"></i></span>
                     </p>
                     <a class="btn btn-info" href="/campgrounds/<%= campground["_id"] %>">See More</a>
                     <hr>
@@ -39,5 +53,6 @@
         
     </div>
     
+                        
 
 <% include ../partials/footer %>

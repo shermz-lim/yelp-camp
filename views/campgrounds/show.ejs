@@ -33,7 +33,20 @@
                 
                 
                 <div class="pt-3 d-flex justify-content-between">
-                    <h6>3.25 stars</h6>
+                    <h6>
+                        Rating: 
+                        <% if (campground.rating >= 1) { %>
+                        <%= campground.rating %>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star <% if (campground.rating > 1.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (campground.rating > 2.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (campground.rating > 3.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (campground.rating > 4.5) { %> checked <% } %>"></span>
+                        <% } else { %>
+                        No reviews yet.
+                        <% } %>
+                        (<%= campground.comments.length %>)
+                    </h6>
                     <h6><%= campground.comments.length %> reviews</h6>
                 </div>
                 
@@ -59,7 +72,7 @@
                         <span class="fa fa-star <% if (comment.rating > 4.5) { %> checked <% } %>"></span>
                         </strong>
                         
-                        <!--<span class="badge badge-default"><%= //comment.updatedAt.toDateString() %></span>-->
+                        <span class="badge badge-default"><%= comment.updatedAt.toDateString() %></span>
                     </div>
                     <p class="py-1 m-0">
                         <%= comment.text %>
