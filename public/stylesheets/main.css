@@ -3,3 +3,6 @@
     background-image: linear-gradient(to bottom, #f2f2f2, #f4f4f4, #f5f6f5, #f7f7f7, #f9f9f9);
 }
 
+span.checked {
+    color: orange;
+}

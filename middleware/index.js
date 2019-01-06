@@ -56,5 +56,23 @@ middlewareObj.checkCampgroundOwnership = function (req, res, next) {
     };
 };
 
+// Checks whether user has already left a review for that campground 
+middlewareObj.checkUserReviewed = function (req, res, next) {
+    Campground.findById(req.params.id).populate("comments").exec(function(err, campground) {
+        if (err || !campground) {
+            console.log(err);
+            req.flash("error", "Campground does not exist anymore.");
+            res.redirect("/campgrounds");
+        } else {
+            campground.comments.forEach(function(comment){
+                if (comment.author.id.equals(req.user._id)) {
+                    req.flash("error", "You can only leave 1 review per campground.")
+                    res.redirect("/campgrounds/" + req.params.id)
+                }
+            });
+            return next();
+        };
+    });
+};
     
 module.exports = middlewareObj

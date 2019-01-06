@@ -11,9 +11,9 @@ var express = require('express'),
 // ============================
 
 // NEW
-router.get("/new", middleware.isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, middleware.checkUserReviewed, function(req, res) {
     Campground.findById(req.params.id, function(err, campground){
-        if (err) {
+        if (!campground || err) {
             console.log(err);
             req.flash("error", "Comment does not exist anymore.")
             res.redirect("/campgrounds/" + req.params.id)
@@ -24,14 +24,14 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 });
 
 // CREATE
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.isLoggedIn, middleware.checkUserReviewed, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
-        if (err) {
+        if (!foundCampground || err) {
             console.log(err);
             res.redirect("/campgrounds");
         } else {
             Comment.create(req.body.comment, function(err, newComment){
-                if (err) {
+                if (!newComment || err) {
                     console.log(err);
                     req.flash('error', 'Fail to create comment.')
                     res.redirect("/campgrounds/" + req.params.id)
@@ -59,11 +59,13 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 // EDIT 
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
     Campground.findById(req.params.id, function(err, campground){
-        if (err) {
+        if (!campground || err) {
             console.log(err);
+            req.flash("Campground does not exist anymore.");
+            res.redirect("/campgrounds/" + req.params.id);
         } else {
             Comment.findById(req.params.comment_id, function(err, comment){
-                if (err) {
+                if (!comment || err) {
                     console.log(err);
                     req.flash("error", "Comment does not exist anymore.")
                     res.redirect("back");
@@ -78,7 +80,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 // UPDATE route 
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment){
-        if (err) {
+        if (!comment || err) {
             console.log(err);
             req.flash('error', 'Fail to create comment.')
             res.redirect("back")

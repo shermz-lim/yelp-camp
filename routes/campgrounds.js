@@ -85,7 +85,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
         if (err) {
             console.log(err);
             req.flash("error", "You cannot edit the campground.")
-            res.redirect("back")
+            res.redirect("/campgrounds/" + req.params.id)
         } else {
             res.render("campgrounds/edit", {campground: campground})
         }
