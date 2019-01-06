@@ -1,7 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     User = require("../models/user.js"),
-    passport = require("passport")
+    passport = require("passport"),
+    Campground = require("../models/campground.js")
 
 
 
@@ -48,6 +49,8 @@ router.get("/logout", function(req, res) {
     req.flash("success", "You have successfully logged out.")
     res.redirect("/campgrounds");
 })
+
+
 
 
 

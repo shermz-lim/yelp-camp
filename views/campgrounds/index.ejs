@@ -6,8 +6,16 @@
             you need to start planning for your camping trip. Sign up now to upload campsites, or leave reviews to campsites you have been to. Join our community
             of campers now!</p>
             <h5 class="display-5">What you can do:</h5>
-                <a class="btn btn-info m-3" href="/campgrounds/new">Create New Campground</a>
+                <form action="/campgrounds" method="GET" class="form-inline ml-1 d-inline">
+                    <input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <a class="d-inline ml-5 btn btn-info m-3" href="/campgrounds/new">Create New Campground</a>
         </header>
+        
+        <% if (match) { %>
+        <p class="lead text-center"><%= match %></p>
+        <% } %>
         
         <div class="row">
             <% campgrounds.forEach(function(campground){ %>
