@@ -2,15 +2,8 @@
 
 <div class="container">
     <div class="mt-5 row justify-content-around">
-        <div class="col-3 col-md-3">
-            <a class="btn btn-info btn mt-3 mb-5" href="/campgrounds">Go Back</a>
-            <ul class="list-group">
-              <li class="list-group-item active">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-            </ul>
-        </div>
-        <div class="col-9 col-md-8">
+        
+        <div class="col-md-10">
             <h1 class="display-4"><%= campground.name %><span class="text-muted display-4">  |   <%= campground.location %></span> 
             <% if (user && campground.author.id.equals(user._id)) { %>
                 <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/edit"><i class="fas fa-edit"></i></a>
