@@ -23,6 +23,10 @@ const campgroundSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    rating: {
+        type: Number,
+        default: 0
     }
 });
 

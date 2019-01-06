@@ -23,7 +23,9 @@ const commentSchema = new mongoose.Schema({
             validator: Number.isInteger,
             message: "{VALUE} is not an integer value."
         }
-    },
+    }
+}, {
+    timestamps: true
 });
 
 module.exports = new mongoose.model("Comment", commentSchema);
